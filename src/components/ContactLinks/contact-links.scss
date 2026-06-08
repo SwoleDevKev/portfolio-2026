@@ -1,0 +1,30 @@
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.15rem 1.4rem;
+    border: 1px solid var(--b);
+    color: var(--t);
+    font-size: 0.86rem;
+    border-radius: var(--radius-md);
+    transition: border-color 0.2s, color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--a);
+      color: var(--a);
+
+      .contact-links__arrow { transform: translate(2px, -2px); }
+    }
+  }
+
+  &__arrow {
+    display: inline-block;
+    transition: transform 0.2s;
+  }
+}

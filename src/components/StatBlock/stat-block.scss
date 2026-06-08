@@ -1,0 +1,40 @@
+.stat-block {
+  background: var(--s2);
+  padding: 2.25rem 2rem;
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  &--primary::before  { background: var(--a);  }
+  &--secondary::before { background: var(--a2); }
+
+  &__num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.5rem;
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  &--primary   .stat-block__num { color: var(--a); }
+  &--secondary .stat-block__num { color: var(--a2); }
+
+  &__label {
+    font-size: 0.8rem;
+    color: var(--tm);
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 180px;
+  }
+}

@@ -1,0 +1,269 @@
+// ── Hero ─────────────────────────────────────────────────────────────
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  // Background image layer
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background: url('/images/blue-banner.png') center / cover no-repeat;
+    z-index: 0;
+  }
+
+  // Dark overlay — animates from opaque to semi-transparent, revealing image
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: #050A14;
+    z-index: 1;
+    animation: hero-overlay-reveal 3s ease-out 0.3s forwards;
+  }
+
+  // Content sits above both layers
+  &__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0 3rem;
+
+    @media (max-width: 960px) { padding: 0 1.5rem; }
+  }
+
+  // ── Content items — staggered fade up ───────────────────────────
+  &__eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--a2);
+    font-weight: 500;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    animation: hero-fade-up 0.8s ease-out 0.2s both;
+
+    &::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--a2);
+      display: inline-block;
+    }
+  }
+
+  &__name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4.5rem, 10vw, 9.5rem);
+    font-weight: 300;
+    line-height: 0.87;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
+    animation: hero-fade-up 0.9s ease-out 0.45s both;
+
+    em { font-style: italic; color: var(--a); }
+  }
+
+  &__sub {
+    font-size: 1.05rem;
+    color: var(--tm);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.85;
+    margin-bottom: 3rem;
+    animation: hero-fade-up 0.8s ease-out 0.65s both;
+  }
+
+  // ── Path cards ─────────────────────────────────────────────────
+  &__paths {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 680px;
+    animation: hero-fade-up 0.8s ease-out 0.85s both;
+
+    @media (max-width: 600px) { grid-template-columns: 1fr; }
+  }
+}
+
+// ── Animations ───────────────────────────────────────────────────────
+
+@keyframes hero-overlay-reveal {
+  from { opacity: 1; }
+  to   { opacity: 0.75; }
+}
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Path cards ────────────────────────────────────────────────────────
+
+.path-card {
+  padding: 1.875rem 2rem;
+  cursor: pointer;
+  transition: background 0.25s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  outline: none;
+
+  &:focus-visible { outline: 2px solid var(--a); outline-offset: -2px; }
+
+  &--build {
+    background: rgba(91, 138, 240, 0.18);
+    border: 1px solid rgba(91, 138, 240, 0.3);
+
+    &:hover { background: rgba(91, 138, 240, 0.26); }
+
+    .path-card__label { color: var(--a); }
+    .path-card__cta   { color: var(--a); }
+  }
+
+  &--hire {
+    background: rgba(168, 192, 255, 0.12);
+    border: 1px solid rgba(168, 192, 255, 0.22);
+
+    &:hover { background: rgba(168, 192, 255, 0.2); }
+
+    .path-card__label { color: var(--a2); }
+    .path-card__cta   { color: var(--a2); }
+  }
+
+  &__label {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  &__title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--t);
+    line-height: 1.1;
+  }
+
+  &__desc {
+    font-size: 0.8rem;
+    color: var(--tm);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  &__cta {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 0.25rem;
+    transition: letter-spacing 0.2s;
+  }
+
+  &:hover .path-card__cta { letter-spacing: 0.14em; }
+}
+
+// ── Work section ─────────────────────────────────────────────────────
+
+.work {
+  background: var(--s1);
+
+  &__hint {
+    font-size: 0.78rem;
+    color: var(--td);
+    margin-top: -2.25rem;
+    margin-bottom: 2.75rem;
+    letter-spacing: 0.05em;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+
+    @media (max-width: 960px) { grid-template-columns: 1fr; }
+  }
+}
+
+// ── Services section ──────────────────────────────────────────────────
+
+.services {
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+
+    @media (max-width: 960px) { grid-template-columns: 1fr; }
+  }
+
+  &__cta { text-align: center; }
+}
+
+// ── About section ─────────────────────────────────────────────────────
+
+.about {
+  background: var(--s1);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 5.5rem;
+    align-items: start;
+
+    @media (max-width: 960px) { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  &__text {
+    p {
+      color: var(--tm);
+      margin-bottom: 1.2rem;
+      line-height: 1.9;
+      font-size: 1rem;
+      font-weight: 300;
+
+      strong { color: var(--t); font-weight: 500; }
+    }
+  }
+
+  &__stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+// ── Contact section ───────────────────────────────────────────────────
+
+.contact {
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5.5rem;
+    align-items: center;
+
+    @media (max-width: 960px) { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+
+  &__note {
+    font-size: 0.95rem;
+    color: var(--tm);
+    font-weight: 300;
+    line-height: 1.9;
+    margin-top: -0.5rem;
+  }
+}

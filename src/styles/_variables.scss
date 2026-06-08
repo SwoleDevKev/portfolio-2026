@@ -1,0 +1,28 @@
+:root {
+  // ── Backgrounds ───────────────────────────────────────────────────
+  --bg:  #0D1117;   // main bg — dark navy, not pure black
+  --s1:  #131929;   // section alternates (slightly lighter)
+  --s2:  #182030;   // card / elevated surfaces
+  --s3:  #1E2A3E;   // hover states
+
+  // ── Borders ───────────────────────────────────────────────────────
+  --b:   rgba(168, 192, 255, 0.10);  // subtle
+  --bm:  rgba(168, 192, 255, 0.20);  // medium
+
+  // ── Text ──────────────────────────────────────────────────────────
+  --t:   #E8EDF8;                     // primary
+  --tm:  rgba(232, 237, 248, 0.50);   // muted
+  --td:  rgba(232, 237, 248, 0.24);   // very muted / decorative
+
+  // ── Accents ───────────────────────────────────────────────────────
+  --a:   #5B8AF0;                     // primary blue
+  --a2:  #A8C0FF;                     // light blue (career side)
+  --ab:  rgba(91,  138, 240, 0.12);   // accent bg tint
+  --a2b: rgba(168, 192, 255, 0.08);   // accent2 bg tint
+
+  // ── Border radius ─────────────────────────────────────────────────
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}

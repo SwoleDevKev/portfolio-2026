@@ -1,0 +1,75 @@
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  padding: 1.35rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.35s, border-color 0.35s;
+  border-bottom: 1px solid transparent;
+
+  &--scrolled {
+    background: rgba(13, 17, 23, 0.93);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-color: var(--b);
+  }
+
+  &__logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--t);
+  }
+
+  &__back {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tm);
+    transition: color 0.2s;
+    cursor: pointer;
+
+    &:hover { color: var(--a2); }
+  }
+
+  &__links {
+    display: flex;
+    gap: 1.875rem;
+    align-items: center;
+
+    @media (max-width: 960px) { display: none; }
+  }
+
+  &__link {
+    color: var(--tm);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    cursor: pointer;
+
+    &:hover { color: var(--t); }
+  }
+
+  &__badge {
+    padding: 0.38rem 0.95rem;
+    border: 1px solid var(--a2);
+    color: var(--a2);
+    border-radius: var(--radius-sm);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(168, 192, 255, 0.1);
+      color: var(--t);
+    }
+  }
+
+  @media (max-width: 960px) { padding: 1.2rem 1.5rem; }
+}
