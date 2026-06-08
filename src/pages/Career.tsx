@@ -59,7 +59,7 @@ export default function Career() {
 
         <FadeIn delay={280} className="career-hero__avatar-wrap">
           <div className="career-hero__avatar">
-            <img src="../public/images/headshot-transp.png" alt="" />
+            <img src="/images/headshot-transp.png" alt="" />
           </div>
         </FadeIn>
       </section>
