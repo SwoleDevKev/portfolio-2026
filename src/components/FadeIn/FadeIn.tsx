@@ -1,5 +1,5 @@
 import { useInView } from 'react-intersection-observer'
-import { ReactNode, CSSProperties } from 'react'
+import type { ReactNode, CSSProperties } from 'react'
 import './fade-in.scss'
 
 interface FadeInProps {
