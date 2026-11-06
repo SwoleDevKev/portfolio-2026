@@ -114,7 +114,7 @@ export default function Career() {
                 </p>
               </div>
               <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn--a2">
-                View Résumé <ChevronRight />
+                View Resume <ChevronRight />
               </a>
             </div>
           </FadeIn>

@@ -1,29 +1,39 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import './phone-mockup.scss'
 
 interface Props {
   video?: string
   poster?: string
+  /** Controlled by the parent: true = play from the start, false = pause and reset */
+  playing?: boolean
+  loop?: boolean
+  /** Fires when a non-looping play-through finishes, or the video fails to play */
+  onEnded?: () => void
 }
 
-export default function PhoneMockup({ video, poster }: Props) {
+export default function PhoneMockup({ video, poster, playing = false, loop = false, onEnded }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
+  // Latest callback without restarting the play effect each render
+  const onEndedRef = useRef(onEnded)
+  useEffect(() => { onEndedRef.current = onEnded })
 
   useEffect(() => {
     const el = videoRef.current
     if (!el || !video) return
-    if (isPlaying) {
+    if (playing) {
       el.currentTime = 0
-      el.play().catch(() => {})
+      // Autoplay can be blocked or the format unsupported; skip to the next card instead of stalling
+      el.play().catch((err: DOMException) => {
+        if (err.name !== 'AbortError') onEndedRef.current?.()
+      })
     } else {
       el.pause()
       el.currentTime = 0
     }
-  }, [isPlaying, video])
+  }, [playing, video])
 
   return (
-    <div className="iphone" onMouseEnter={() => setIsPlaying(prev => !prev)}>
+    <div className="iphone">
       <div className="iphone__body">
         <div className="iphone__btn iphone__btn--silent" />
         <div className="iphone__btn iphone__btn--vol-up" />
@@ -39,8 +49,11 @@ export default function PhoneMockup({ video, poster }: Props) {
                 poster={poster}
                 muted
                 playsInline
-                preload="none"
-                loop
+                preload="metadata"
+                loop={loop}
+                onEnded={() => onEndedRef.current?.()}
+                onError={() => playing && onEndedRef.current?.()}
+                aria-hidden="true"
               />
             ) : (
               <div className="iphone__placeholder" />

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import Nav from '../components/Nav/Nav'
 import FadeIn from '../components/FadeIn/FadeIn'
-import ProjectCard from '../components/ProjectCard/ProjectCard'
+import ProjectGrid from '../components/ProjectGrid/ProjectGrid'
 import ServiceCard from '../components/ServiceCard/ServiceCard'
 import StatBlock from '../components/StatBlock/StatBlock'
 import ContactLinks from '../components/ContactLinks/ContactLinks'
@@ -108,11 +108,9 @@ export default function Home() {
         <div className="wrap">
           <FadeIn><p className="section-label">Work</p></FadeIn>
           <FadeIn delay={70}><h2 className="section-title">Recent <em>Projects</em></h2></FadeIn>
-          <FadeIn delay={100}><p className="work__hint">Hover a card to scroll the preview</p></FadeIn>
+          <FadeIn delay={100}><p className="work__hint">Live previews of each project</p></FadeIn>
           <FadeIn delay={120}>
-            <div className="work__grid">
-              {projects.map((p) => <ProjectCard key={p.id} project={p} />)}
-            </div>
+            <ProjectGrid projects={projects} />
           </FadeIn>
         </div>
       </section>

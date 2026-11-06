@@ -1,9 +1,22 @@
-import { useState } from 'react'
+import { useState, type PointerEvent, type Ref } from 'react'
 import type { Project } from '../../data/projects'
 import PhoneMockup from '../PhoneMockup/PhoneMockup'
 import './project-card.scss'
 
-interface Props { project: Project }
+interface Props {
+  project: Project
+  ref?: Ref<HTMLDivElement>
+  isActive?: boolean
+  loop?: boolean
+  onPreviewEnd?: () => void
+  onHoverStart?: () => void
+  onHoverEnd?: () => void
+}
+
+// Ignore the emulated hover events touch devices fire on tap
+const mouseOnly = (fn?: () => void) => (e: PointerEvent) => {
+  if (e.pointerType === 'mouse') fn?.()
+}
 
 const ArrowIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
@@ -52,19 +65,30 @@ function CredentialRow({ role, email, password }: { role: string; email: string;
   )
 }
 
-export default function ProjectCard({ project }: Props) {
+export default function ProjectCard({
+  project, ref, isActive = false, loop = false, onPreviewEnd, onHoverStart, onHoverEnd,
+}: Props) {
   const { name, badges, description, tech, url, credentials, video, poster } = project
 
   return (
     <div
-      className="project-card"
+      ref={ref}
+      className={`project-card${isActive ? ' project-card--active' : ''}`}
+      onPointerEnter={mouseOnly(onHoverStart)}
+      onPointerLeave={mouseOnly(onHoverEnd)}
     >
-      <PhoneMockup video={video} poster={poster}   />
-
+      <PhoneMockup video={video} poster={poster} playing={isActive} loop={loop} onEnded={onPreviewEnd} />
 
       <div className="project-card__info">
         <div className="project-card__header">
-          <h3 className="project-card__name">{name}</h3>
+          <h3 className="project-card__name">
+            {url ? (
+              // Stretched link: its ::after covers the whole card, making the card clickable
+              <a href={url} target="_blank" rel="noopener noreferrer" className="project-card__title-link">
+                {name}
+              </a>
+            ) : name}
+          </h3>
           <div className="project-card__badges">
             {badges.map((b, i) => (
               <span key={i} className={`project-card__badge${b.type !== 'default' ? ` project-card__badge--${b.type}` : ''}`}>
@@ -88,7 +112,8 @@ export default function ProjectCard({ project }: Props) {
         )}
 
         {url && (
-          <a href={url} target="_blank" rel="noopener noreferrer" className="project-card__link">
+          // Same destination as the title link, so keep it out of the tab order / screen reader to avoid a duplicate
+          <a href={url} target="_blank" rel="noopener noreferrer" className="project-card__link" tabIndex={-1} aria-hidden="true">
             Visit site <ArrowIcon />
           </a>
         )}

@@ -39,7 +39,7 @@ export const projects: Project[] = [
     badges: [{ label: 'Live', type: 'live' }, { label: 'iOS · Android', type: 'default' }],
     description: 'Social reading platform for book clubs. Real-time chat, threaded discussions, club discovery, and push notifications. Live on the App Store and Google Play.',
     tech: ['React Native', 'Expo', 'Spring Boot', 'PostgreSQL'],
-    url: 'https://readingguild.com/download',
+    url: 'https://readingguild.com',
   },
   {
     id: 'pocketpt',
